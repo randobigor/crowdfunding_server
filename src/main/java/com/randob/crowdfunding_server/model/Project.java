@@ -34,7 +34,7 @@ public class Project {
   @JoinColumn(name = "user_id")
   private User user;
 
-  @Column(name = "collected")
+  @Column(name = "collected", insertable = false)
   private Float collected;
 
   @Column(name = "target")
@@ -42,4 +42,7 @@ public class Project {
 
   @Column(name = "anonymous")
   private Boolean anonymous;
+
+  @Column(name = "picture")
+  private String picture;
 }
