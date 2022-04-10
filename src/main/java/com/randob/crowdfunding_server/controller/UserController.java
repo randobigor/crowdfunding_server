@@ -2,9 +2,7 @@ package com.randob.crowdfunding_server.controller;
 
 import com.randob.crowdfunding_server.model.User;
 import com.randob.crowdfunding_server.repository.UserRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,10 @@ public class UserController {
   @GetMapping
   public List<User> getAllUsers() {
     return userRepository.findAll();
+  }
+
+  @GetMapping("/{id}")
+  public User getUserById(@PathVariable Long id) {
+    return userRepository.findById(id).get();
   }
 }

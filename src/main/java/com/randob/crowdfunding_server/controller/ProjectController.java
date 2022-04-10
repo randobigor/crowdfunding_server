@@ -1,6 +1,6 @@
 package com.randob.crowdfunding_server.controller;
 
-import com.randob.crowdfunding_server.ProjectDto;
+import com.randob.crowdfunding_server.dto.ProjectDto;
 import com.randob.crowdfunding_server.model.Project;
 import com.randob.crowdfunding_server.repository.ProjectRepository;
 import org.springframework.web.bind.annotation.*;

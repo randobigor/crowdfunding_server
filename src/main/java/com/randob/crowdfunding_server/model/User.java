@@ -34,4 +34,7 @@ public class User {
 
   @Column(name = "balance")
   private Float balance;
+
+  @Column(name = "picture")
+  private String picture;
 }

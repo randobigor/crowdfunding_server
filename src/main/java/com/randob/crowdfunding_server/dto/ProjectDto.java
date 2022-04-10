@@ -1,4 +1,4 @@
-package com.randob.crowdfunding_server;
+package com.randob.crowdfunding_server.dto;
 
 import com.randob.crowdfunding_server.model.Category;
 import com.randob.crowdfunding_server.model.Project;
@@ -20,7 +20,7 @@ public class ProjectDto {
   private String name;
   private String picture;
   private Float target;
-  private User user;
+  private Long user;
 
   public static Project toEntity(ProjectDto dto) {
     Project project = new Project();
@@ -29,7 +29,11 @@ public class ProjectDto {
     project.setName(dto.getName());
     project.setPicture(dto.getPicture());
     project.setTarget(dto.getTarget());
-    project.setUser(dto.getUser());
+
+    User user = new User();
+    user.setId(dto.getUser());
+
+    project.setUser(user);
 
     return project;
   }
