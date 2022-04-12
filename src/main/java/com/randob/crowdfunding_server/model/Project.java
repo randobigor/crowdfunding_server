@@ -3,17 +3,20 @@ package com.randob.crowdfunding_server.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author randobigor
  **/
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Entity
 @Table(name = "projects", schema = "public")
 public class Project {
   @Id
@@ -31,7 +34,7 @@ public class Project {
   private Category category;
 
   @ManyToOne
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "created_by")
   private User user;
 
   @Column(name = "collected", insertable = false)
@@ -40,9 +43,20 @@ public class Project {
   @Column(name = "target")
   private Float target;
 
-  @Column(name = "anonymous")
-  private Boolean anonymous;
-
   @Column(name = "picture")
   private String picture;
+
+  @Column(name = "completed", insertable = false)
+  private Boolean completed;
+
+  @Column(name = "created_tm", insertable = false, updatable = false)
+  private LocalDateTime createdDateTime;
+
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  @JoinTable(
+      name = "projects_to_pictures",
+      joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id")
+  )
+  private List<Picture> descriptionPictures;
 }

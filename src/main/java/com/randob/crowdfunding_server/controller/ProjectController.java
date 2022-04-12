@@ -37,8 +37,6 @@ public class ProjectController {
 
   @PostMapping
   public void createNewProject(@RequestBody ProjectDto projectDto) {
-    Project project = ProjectDto.toEntity(projectDto);
-    project.setAnonymous(false);
-    projectRepository.save(project);
+    projectRepository.save(ProjectDto.toEntity(projectDto));
   }
 }

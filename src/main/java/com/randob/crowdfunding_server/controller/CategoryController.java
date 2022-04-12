@@ -23,6 +23,6 @@ public class CategoryController {
 
   @GetMapping
   public List<Category> getAllCategories() {
-    return categoryRepository.findAll();
+    return categoryRepository.findByOrderByPosition();
   }
 }

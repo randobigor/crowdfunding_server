@@ -1,6 +1,7 @@
 package com.randob.crowdfunding_server.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder(toBuilder = true)
 @Table(name = "users", schema = "public")
 public class User {
   @Id

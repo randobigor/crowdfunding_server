@@ -1,6 +1,5 @@
 package com.randob.crowdfunding_server.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,20 +12,16 @@ import javax.persistence.*;
  **/
 
 @Entity
-@Table(name = "categories")
+@Table(name = "pictures")
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
+public class Picture {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "name")
-  private String name;
-
-  @JsonIgnore
-  @Column(name = "position")
-  private Integer position;
+  @Column(name = "content")
+  private String content;
 }
