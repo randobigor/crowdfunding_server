@@ -8,16 +8,19 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.PUBLIC_SCHEMA;
+import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.CATEGORIES;
+
 /**
  * @author randobigor
  **/
 
-@Entity
-@Table(name = "categories")
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = CATEGORIES, schema = PUBLIC_SCHEMA)
 public class Category {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

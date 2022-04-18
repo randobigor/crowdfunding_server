@@ -7,6 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import java.util.List;
+
+import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.PUBLIC_SCHEMA;
+import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.USERS;
+import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.USERS_TO_ROLES;
+
 /**
  * @author randobigor
  **/
@@ -16,7 +22,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Builder(toBuilder = true)
-@Table(name = "users", schema = "public")
+@Table(name = USERS, schema = PUBLIC_SCHEMA)
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +40,17 @@ public class User {
   @Column(name = "password")
   private String password;
 
-  @Column(name = "balance")
+  @Column(name = "balance", insertable = false)
   private Float balance;
 
   @Column(name = "picture")
   private String picture;
+
+  @ManyToMany
+  @JoinTable(
+      name = USERS_TO_ROLES, schema = PUBLIC_SCHEMA,
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+  )
+  private List<Role> roles;
 }

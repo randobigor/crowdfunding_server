@@ -1,30 +1,28 @@
 package com.randob.crowdfunding_server.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.PUBLIC_SCHEMA;
-import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.PICTURES;
+import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.ROLES;
 
 /**
  * @author randobigor
  **/
 
-@Entity
-@Table(name = PICTURES, schema = PUBLIC_SCHEMA)
 @Data
-@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Picture {
+@Entity
+@Table(name = ROLES, schema = PUBLIC_SCHEMA)
+public class Role {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "content")
-  private String content;
+  @Column(name = "name")
+  private String name;
 }
