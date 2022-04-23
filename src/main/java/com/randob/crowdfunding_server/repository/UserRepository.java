@@ -17,10 +17,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
   Optional<User> findByEmail(String email);
 
   @Modifying
-  @Query("update User u set u.picture = ?1 where u.id = ?2")
-  void updateUserPhotoById(String picture, Long id);
+  @Query("UPDATE User u SET u.picture = ?1 WHERE u.id = ?2")
+  void updateUserPhoto(String picture, Long id);
 
   @Modifying
-  @Query("update User u set u.balance = u.balance + ?1 where u.id = ?2")
-  void addFundsToAccountById(Float value, Long id);
+  @Query("UPDATE User u SET u.balance = u.balance + ?1 WHERE u.id = ?2")
+  void addFundsToAccount(Float value, Long id);
+
+  @Modifying
+  @Query("UPDATE User u SET u.balance = u.balance - ?1 WHERE u.id = ?2")
+  void withdrawMoneyFromBalance(Float value, Long id);
 }

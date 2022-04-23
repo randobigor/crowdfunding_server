@@ -40,13 +40,13 @@ public class UserController {
   @Transactional
   @ResponseStatus(HttpStatus.OK)
   public void updateUserPhoto(@RequestBody User user, Authentication authentication) {
-    userRepository.updateUserPhotoById(user.getPicture(), user.getId());
+    userRepository.updateUserPhoto(user.getPicture(), user.getId());
   }
 
   @PreAuthorize("isAuthenticated()")
   @PutMapping("/add-funds")
   @Transactional
   public void addFundsToAccountByUserId(@RequestBody AddFundsDto dto) {
-    userRepository.addFundsToAccountById(dto.getValue(), dto.getUserId());
+    userRepository.addFundsToAccount(dto.getValue(), dto.getUserId());
   }
 }
