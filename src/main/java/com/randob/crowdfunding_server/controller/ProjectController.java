@@ -59,8 +59,9 @@ public class ProjectController {
   @Transactional
   public ResponseEntity<?> donateProject(@RequestBody DonationDto dto, Authentication authentication) {
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-    if(userDetails.getBalance() > dto.getValue()) {
+    if(userDetails.getBalance() >= dto.getValue()) {
       userRepository.withdrawMoneyFromBalance(dto.getValue(), userDetails.getId());
+      projectRepository.updateCollectedMoney(dto.getValue(), dto.getProjectId());
       return ResponseEntity.ok(new MessageResponse("Success"));
     } else {
       return ResponseEntity.badRequest().body(new MessageResponse("Not enough funds on the account"));
