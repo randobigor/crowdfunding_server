@@ -1,6 +1,8 @@
 package com.randob.crowdfunding_server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,13 +11,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.PUBLIC_SCHEMA;
-import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.PROJECTS;
-import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.PROJECTS_TO_PICTURES;
+import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Tables.*;
 
 /**
  * @author randobigor
  **/
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -15,4 +15,5 @@ public class DonationDto {
   private Long userId;
   private Long projectId;
   private Float value;
+  private boolean anonymous;
 }

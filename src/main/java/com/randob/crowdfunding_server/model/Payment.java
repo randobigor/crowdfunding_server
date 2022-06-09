@@ -1,6 +1,7 @@
 package com.randob.crowdfunding_server.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import static com.randob.crowdfunding_server.util.DatabaseConstants.Public.Table
  * @author randobigor
  **/
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,11 +26,11 @@ public class Payment {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "datetime", updatable = false, insertable = false)
+  @Column(name = "processed_tm", updatable = false, insertable = false)
   private LocalDateTime dateTime;
 
   @ManyToOne
-  @JoinColumn(name = "user_id")
+  @JoinColumn(name = "donated_by")
   private User user;
 
   @ManyToOne
@@ -37,4 +39,7 @@ public class Payment {
 
   @Column(name = "value")
   private Float value;
+
+  @Column(name = "anonymous")
+  private boolean anonymous;
 }

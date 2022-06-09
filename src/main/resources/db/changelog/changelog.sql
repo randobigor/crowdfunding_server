@@ -89,3 +89,6 @@ INSERT INTO roles(name) VALUES
 ('ROLE_ADMIN'),
 ('ROLE_MODERATOR'),
 ('ROLE_USER');
+
+--changeset randobigor:adding-anonymous-flag-to-payments
+ALTER TABLE payments ADD COLUMN anonymous BOOLEAN NOT NULL DEFAULT FALSE;

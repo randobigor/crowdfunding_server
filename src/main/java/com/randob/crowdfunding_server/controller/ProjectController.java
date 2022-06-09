@@ -7,6 +7,7 @@ import com.randob.crowdfunding_server.payload.response.MessageResponse;
 import com.randob.crowdfunding_server.repository.ProjectRepository;
 import com.randob.crowdfunding_server.repository.UserRepository;
 import com.randob.crowdfunding_server.security.services.UserDetailsImpl;
+import com.randob.crowdfunding_server.services.PaymentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +27,7 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ProjectController {
   private final ProjectRepository projectRepository;
-  private final UserRepository userRepository;
+  private final PaymentService paymentService;
 
   @PreAuthorize("permitAll()")
   @GetMapping
@@ -58,17 +59,10 @@ public class ProjectController {
   public ResponseEntity<?> donateProject(@RequestBody DonationDto dto, Authentication authentication) {
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
     if(userDetails.getBalance() >= dto.getValue()) {
-      userRepository.withdrawMoneyFromBalance(dto.getValue(), userDetails.getId());
-      projectRepository.updateCollectedMoney(dto.getValue(), dto.getProjectId());
+      paymentService.makeDonation(dto, authentication);
       return ResponseEntity.ok(new MessageResponse("Success"));
     } else {
       return ResponseEntity.badRequest().body(new MessageResponse("Not enough funds on the account"));
     }
   }
-//
-//  @PreAuthorize("#projectDto.user == authentication.getPrincipal().getId()")
-//  @PutMapping
-//  public void updateProject(@RequestBody ProjectDto projectDto, Authentication authentication) {
-//    System.out.println("some code");
-//  }
 }
