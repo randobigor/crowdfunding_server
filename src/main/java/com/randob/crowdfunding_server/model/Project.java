@@ -1,5 +1,6 @@
 package com.randob.crowdfunding_server.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,6 +55,7 @@ public class Project {
   @Column(name = "completed", insertable = false)
   private Boolean completed;
 
+  @JsonFormat(pattern="yyyy-MM-dd")
   @Column(name = "created_tm", insertable = false, updatable = false)
   private LocalDateTime createdDateTime;
 
@@ -64,4 +66,7 @@ public class Project {
       inverseJoinColumns = @JoinColumn(name = "picture_id", referencedColumnName = "id")
   )
   private List<Picture> descriptionPictures;
+
+  @OneToMany(mappedBy = "project")
+  private List<Payment> payments;
 }
